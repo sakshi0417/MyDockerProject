@@ -1,0 +1,58 @@
+docker node ls
+docker service create --name firstsvc -p 29999:80 --replicas=3 nginx:1.17
+docker ps -a
+docker rm -f-------(running container name)
+docker ps -a
+docekr service ls (service is creted just check)
+docker serivice ps firstsvc(check the  process for the service firstsvc)
+docker ps -a 
+others containers are runnig on other nodes 
+
+
+2)  
+docker service scale firstsvc=4
+docker service ls
+docker service ps firstsvc
+docker ps -a
+and also go on other node run  docker ps -a 
+docker service scale firstsvc=1
+
+3)
+docker service ls
+docker service ps firstsvc
+docker service  update firstsvc --image=nginx:1.18
+just check  
+docker service ls 
+docker service ps firstsvc
+docker  ps -a
+
+5)
+docker service ls
+  docker service ps firstsvc
+docker service rollback firstsvc
+docker service ls 
+docker service ps firstsvc
+docker ps -a
+
+4) 
+docker service create --name secondsvc --mode global nginx:1.19
+
+6)
+docker service rm firstsvc secondsvc                      
+docker service ls
+docker node update -h
+docker node update --label-add type=worker docker-node2(here docker node as take as worker node)
+docker node inspect docker-node2
+
+docker service create --name=thirdsvc --constraint=node.labels.type=worker httpd:latest
+
+docker service ls
+docker service ps thirdsvc(to check the this container process are running on which node )
+docker service scale thirdsvc=2
+docker service ps thirdsvc
+docker service scale thirdsvc=5
+docker service ps thirdsvc
+
+
+
+
